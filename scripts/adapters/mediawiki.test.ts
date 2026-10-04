@@ -10,6 +10,10 @@ describe('toPlainText', () => {
     expect(toPlainText('{{LA|Belias (Final Fantasy XII)|Belias}}{{clear}}')).toBe('Belias')
   })
 
+  it('drops footnote templates whose last argument is named', () => {
+    expect(toPlainText('Gain MP.{{note|reference=1–499=1 MP<br/>|name=MPgain}}')).toBe('Gain MP.')
+  })
+
   it('drops tags, bold quotes and extra whitespace', () => {
     expect(toPlainText("'''Heals'''<br/>  all\n allies")).toBe('Heals all allies')
   })

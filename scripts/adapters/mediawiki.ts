@@ -22,8 +22,8 @@ export async function fetchWikitext(apiUrl: string, page: string): Promise<strin
 export function toPlainText(wikitext: string): string {
   return wikitext
     .replace(/\[\[(?:[^|\]]*\|)?([^\]]*)\]\]/g, '$1') // [[Page|label]], [[Page]]
-    .replace(/\{\{[^{}|]*\|(?:[^{}]*\|)?([^{}|]*)\}\}/g, '$1') // {{T|...|label}} → label
-    .replace(/\{\{[^{}]*\}\}/g, '')
+    .replace(/\{\{[^{}|]*\|(?:[^{}]*\|)?([^{}|=]*)\}\}/g, '$1') // {{T|...|label}} → label
+    .replace(/\{\{[^{}]*\}\}/g, '') // the rest, incl. footnotes like {{note|name=x}}
     .replace(/<[^>]*>/g, '')
     .replace(/'{2,}/g, '')
     .replace(/\s+/g, ' ')
